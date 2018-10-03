@@ -1,0 +1,26 @@
+{
+    "name": "smlhighlighter",
+    "displayName": "smlhighlighter",
+    "description": "Syntax highlighter for .sml files",
+    "version": "0.0.1",
+    "publisher": "Quesstor",
+    "engines": {
+        "vscode": "^1.27.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "sml",
+            "aliases": ["sml", "sml"],
+            "extensions": [".sml"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "sml",
+            "scopeName": "source.sml",
+            "path": "./syntaxes/sml.tmLanguage.json"
+        }]
+    }
+}
