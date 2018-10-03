@@ -37,4 +37,4 @@ which can be found at `%USERPROFILE%\.vscode\extensions` on windows.
 1. create a `.sml` file
 2. start writing sml.
 
- The extension creates a `.html` file with the same name as the .sml file and writes the html code automatically into the `.html` file.
+ The extension creates a `.html` file with the same name as the `.sml` file and writes the html code automatically into the `.html` file.
