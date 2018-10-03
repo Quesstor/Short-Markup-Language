@@ -30,14 +30,19 @@ function compile() {
     let smlcode = window.activeTextEditor.document.getText();
     let lines = smlcode.split(/\r?\n/);
     let html = new HtmlWriter();
+    let tabSpaces = 4;
     let indent = 0;
     let lastLineWasTag = false;
     for (let i = 0; i < lines.length; i++) {
         let l = lines[i];
         if (l.match(/^ *$/)) continue;
 
-        let lineIndent = countLeadingSpaces(l);
-        if (lineIndent < indent || (lineIndent == indent && lastLineWasTag)) html.closeCurrentTag();
+        let lineIndent = countLeadingSpaces(l) / tabSpaces;
+        if(lineIndent == indent && lastLineWasTag) html.closeCurrentTag();
+        while (indent > lineIndent){
+            html.closeCurrentTag();
+            indent -= 1;
+        } 
 
         indent = lineIndent;
         let tagMatch = l.match(/^ *</);
@@ -76,7 +81,8 @@ class HtmlWriter{
         this.tagStack.push(tag.split(" ")[0]);
     }
     writeStr(str: string){
-        this.html += this.getIndent() + str.trim() + "\n";
+        str = str.trim();
+        if(str.length > 0) this.html += this.getIndent() + str + "\n";
     }
     closeCurrentTag(){
         if(this.tagStack.length == 0) return;
